@@ -1,0 +1,40 @@
+{% if current_user.user == "admin" %}
+    {% extends 'portal/admin.html' %}
+{% elif current_user.user == "faculty" %}
+    {% extends 'portal/faculty.html' %}
+{% elif current_user.user == "student" %}
+    {% extends 'portal/student.html' %}
+{% endif %}
+
+{% block content %}
+    <div style="background: url('../../static/board.webp');height: 100vh;overflow-y: auto">
+        {% for announcement in announcements %}
+                <div class="card" style="background: var(--bs-border-color-translucent);color: white;font-family: 'Fredericka the Great', serif;">
+                    <div class="card-body">
+                        <h2 class="card-title text-capitalize">{{ announcement["title"] }}</h2>
+                        <h6>{{ announcement["subject"] }}</h6>
+                        <h6>{{ announcement["author"][1] }}</h6>
+                        <h6>{{ announcement["date"].time().strftime("%H:%M:%S") }}</h6>
+                        <button class="btn btn-primary" type="button" data-bs-target="#modal-1" data-bs-toggle="modal">Show</button>
+                    </div>
+                </div>
+                <hr style="background: white;border-radius: 3px;border-width: 3px;border-color: white;margin: 0" />
+                <div id="modal-1" class="modal fade" role="dialog" tabindex="-1" style="font-family: 'Fredericka the Great', serif;">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div style="background: url('board.webp')">
+                                <div class="modal-header">
+                                    <h4 class="modal-title" style="color: white;">{{ announcement["title"] }}</h4>
+                                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p style="color: white;">{{ announcement["desc"] }}</p>
+                                </div>
+                                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal" style="background: var(--bs-blue);color: var(--bs-modal-bg);border-style: none;">Close</button></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+{% endblock %}

@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css?family=Fredericka+the+Great&display=swap');
+
+.form-control::placeholder{
+  color: white;
+}
+
+.form-select{
+  background-color: transparent;
+  -webkit-appearance: listbox;
+}
+
+.form-select option{
+  color: white;
+  background-color: grey;
+}
+
+.blackboard-button {
+  background-color: black;
+  color: transparent;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  animation: write 2s linear forwards infinite;
+}
+
+@keyframes write {
+  0% {
+    color: transparent;
+  }
+  100% {
+    color: white;
+  }
+}
